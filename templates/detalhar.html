@@ -33,6 +33,11 @@
 </nav>
 
 <main class="container">
+  {% if autor.avatar %}
+  <img src="{{ autor.avatar.url }}" alt="" width="100">
+  {% else %}
+  <img src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635449_1280.png" alt="" width="100">
+  {% endif %}
 <h1>Autor: {{ autor.nome }}</h1>
 <h2>Email: {{autor.email}}</h2>
 <h2>Data nascimento: {{autor.data_nascimento}}</h2>

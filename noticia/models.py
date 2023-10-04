@@ -8,6 +8,7 @@ class Autor(models.Model):
     data_nascimento = models.DateField(default="1980-01-01")
     email = models.EmailField()
     idade = models.PositiveSmallIntegerField()
+    avatar = models.ImageField(upload_to='avatares', blank=True, null=True)
 
     def __str__(self):
         return self.nome
