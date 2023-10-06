@@ -12,3 +12,7 @@ class Autor(models.Model):
 
     def __str__(self):
         return self.nome
+    
+    class Meta:
+        verbose_name = "Escritor"
+        verbose_name_plural = "Escritores"
