@@ -10,7 +10,7 @@
 <h2>Email: {{autor.email}}</h2>
 <h2>Data nascimento: {{autor.data_nascimento}}</h2>
 <h2>Idade: {{autor.idade}}</h2>
-<a class="btn btn-primary" href="{% url 'atualizar' autor.id %}">Atualizar Autor</a>
-<a class="btn btn-danger" href="{% url 'deletar' autor.id %}">Apagar Autor</a>
+<a class="btn btn-primary" href="{% url 'atualizar-autor' autor.id %}">Atualizar Autor</a>
+<a class="btn btn-danger" href="{% url 'deletar-autor' autor.id %}">Apagar Autor</a>
 
 {% endblock %}

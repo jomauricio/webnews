@@ -11,8 +11,8 @@
       {% else %}
       <img src="https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635449_1280.png" alt="" width="60">
       {% endif %}      
-      <a href="{% url 'detalhar' autor.id %}">{{autor.nome}}</a></li>
+      <a href="{% url 'detalhar-autor' autor.id %}">{{autor.nome}}</a></li>
     {% endfor %}
   </ul>
-  <a class="btn btn-primary" href="{% url 'cadastrar' %}" role="button">Cadastrar Autor</a>
+  <a class="btn btn-primary" href="{% url 'cadastrar-autor' %}" role="button">Cadastrar Autor</a>
 {% endblock %}
