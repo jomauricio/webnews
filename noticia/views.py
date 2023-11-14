@@ -11,8 +11,18 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 class HomeTemplateView(TemplateView):
     template_name='home.html'
 
+    def get_context_data(self, **kwargs):
+        
+        context = super().get_context_data(**kwargs)
+        context["noticias"] = Noticia.objects.all()[:5]
+        context["autores"] = Autor.objects.all()[:5]
+        
+        return context
+
+
 # def home(request):
-#     return render(request, 'home.html')
+#     noticias = Noticia.objects.all()
+#     return render(request, 'home.html', {"noticias": noticias})
 
 class AutorListView(ListView):
     model=Autor
@@ -142,3 +152,4 @@ class NoticiaDeleteView(DeleteView):
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Noticia deletada com sucesso!")
         return reverse('listar-noticia')
+

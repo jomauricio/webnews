@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path
 from .views import AutorListView, AutorDetailView, AutorCreateView, AutorUpdateView, AutorDeleteView, NoticiaListView, NoticiaDetailView, NoticiaCreateView, NoticiaDeleteView, NoticiaUpdateView
 
-
 urlpatterns = [
     path('autor', AutorListView.as_view(), name='listar-autor'),
     path('autor/<int:id>', AutorDetailView.as_view(), name='detalhar-autor'),

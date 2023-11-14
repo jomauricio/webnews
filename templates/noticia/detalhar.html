@@ -4,7 +4,7 @@
 <h1>Titulo: {{ noticia.titulo }}</h1>
 <h2>Conteudo: {{noticia.conteudo}}</h2>
 <h2>Data publicação: {{noticia.data_pub}}</h2>
-<h2>Autor: {{noticia.autor}}</h2>
+<h2>Autor: <a href="{% url 'detalhar-autor' noticia.autor.id %}">{{noticia.autor}}</a></h2>
 <a class="btn btn-primary" href="{% url 'atualizar-noticia' noticia.id %}">Atualizar Noticia</a>
 <a class="btn btn-danger" href="{% url 'deletar-noticia' noticia.id %}">Apagar Noticia</a>
 
