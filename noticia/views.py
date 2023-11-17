@@ -4,6 +4,7 @@ from .models import Autor, Noticia
 from .forms import AutorForm, NoticiaForm
 from django.contrib import messages
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 # Create your views here.
@@ -24,7 +25,7 @@ class HomeTemplateView(TemplateView):
 #     noticias = Noticia.objects.all()
 #     return render(request, 'home.html', {"noticias": noticias})
 
-class AutorListView(ListView):
+class AutorListView(LoginRequiredMixin, ListView):
     model=Autor
     template_name='autor/listar.html'
     context_object_name='autores'
@@ -35,7 +36,7 @@ class AutorListView(ListView):
 #     autores = Autor.objects.all().order_by('-nome')
 #     return render(request, 'listar.html', {'autores':autores})
 
-class AutorDetailView(DetailView):
+class AutorDetailView(LoginRequiredMixin, DetailView):
     model=Autor
     template_name='autor/detalhar.html'
     context_object_name='autor'
@@ -47,10 +48,11 @@ class AutorDetailView(DetailView):
 #     return render(request, 'detalhar.html', {'autor':autor})
 
 
-class AutorCreateView(CreateView):
+class AutorCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model=Autor
     template_name='autor/cadastrar.html'
     form_class=AutorForm
+    permission_required = 'noticia.add_autor'
     
 
     def get_success_url(self):
@@ -71,11 +73,12 @@ class AutorCreateView(CreateView):
 #          return render(request, 'cadastrar.html', {'form': form})
 
 
-class AutorUpdateView(UpdateView):
+class AutorUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model=Autor
     template_name='autor/atualizar.html'
     form_class=AutorForm
     pk_url_kwarg='id'
+    permission_required = 'noticia.change_autor'
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Autor atualizado com sucesso!")
@@ -95,10 +98,11 @@ class AutorUpdateView(UpdateView):
 #     else:
 #          return render(request, 'atualizar.html', {'form': form})
 
-class AutorDeleteView(DeleteView):
+class AutorDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model=Autor
     template_name='autor/autor_confirm_delete.html'
     pk_url_kwarg='id'
+    permission_required = 'noticia.delete_autor'
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Autor deletado com sucesso!")
@@ -111,20 +115,20 @@ class AutorDeleteView(DeleteView):
 #     return redirect('listar')
 
 
-class NoticiaListView(ListView):
+class NoticiaListView(LoginRequiredMixin, ListView):
     model=Noticia
     template_name='noticia/listar.html'
     context_object_name='noticias'
     ordering='-titulo'
 
 
-class NoticiaDetailView(DetailView):
+class NoticiaDetailView(LoginRequiredMixin, DetailView):
     model=Noticia
     template_name='noticia/detalhar.html'
     context_object_name='noticia'
 
 
-class NoticiaCreateView(CreateView):
+class NoticiaCreateView(LoginRequiredMixin, CreateView):
     model=Noticia
     template_name='noticia/cadastrar.html'
     form_class=NoticiaForm
@@ -135,7 +139,7 @@ class NoticiaCreateView(CreateView):
         return reverse('listar-noticia')
     
 
-class NoticiaUpdateView(UpdateView):
+class NoticiaUpdateView(LoginRequiredMixin, UpdateView):
     model=Noticia
     template_name='noticia/atualizar.html'
     form_class=NoticiaForm
@@ -145,7 +149,7 @@ class NoticiaUpdateView(UpdateView):
         return reverse('listar-noticia')
     
 
-class NoticiaDeleteView(DeleteView):
+class NoticiaDeleteView(LoginRequiredMixin, DeleteView):
     model=Noticia
     template_name='noticia/noticia_confirm_delete.html'
 
