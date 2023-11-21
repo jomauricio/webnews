@@ -1,4 +1,4 @@
-{% load static %}
+{% load static bootstrap5 %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +38,7 @@
                     <a href="{% url 'logout' %}" class="btn btn-light me-2">Logout</a>
                     {% else %}
                     <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
+                    <a href="{% url 'registration' %}" class="btn btn-primary me-2">Cadastro</a>
                     {% endif %}
                 </div>
             </div>
@@ -46,6 +47,7 @@
 
 
     <main class="container">
+        {% bootstrap_messages %}
         {% block content  %}
             <h1>Bloco de conteudo do site</h1>
         {% endblock%}

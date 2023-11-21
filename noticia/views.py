@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Autor, Noticia
-from .forms import AutorForm, NoticiaForm
+from .forms import AutorForm, NoticiaForm, RegistrationForm
 from django.contrib import messages
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
 
 # Create your views here.
@@ -128,10 +130,11 @@ class NoticiaDetailView(LoginRequiredMixin, DetailView):
     context_object_name='noticia'
 
 
-class NoticiaCreateView(LoginRequiredMixin, CreateView):
+class NoticiaCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model=Noticia
     template_name='noticia/cadastrar.html'
     form_class=NoticiaForm
+    permission_required = 'noticia.pode_publicar'
     
 
     def get_success_url(self):
@@ -156,4 +159,14 @@ class NoticiaDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, "Noticia deletada com sucesso!")
         return reverse('listar-noticia')
+    
+
+class RegistrationView(CreateView):
+    template_name = "registration/registration.html"
+    model = get_user_model()
+    form_class = RegistrationForm
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.SUCCESS, "Cadastro realizado com sucesso!")
+        return reverse('home')
 

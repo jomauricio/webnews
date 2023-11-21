@@ -16,6 +16,9 @@ class Autor(models.Model):
     class Meta:
         verbose_name = "Escritor"
         verbose_name_plural = "Escritores"
+        permissions  = [
+            ("pode_publicar", "Pode publicar uma noticia"),
+        ]
 
 
 class Noticia(models.Model):
