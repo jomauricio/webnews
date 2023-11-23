@@ -1,3 +1,5 @@
+from typing import Any
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Autor, Noticia
@@ -32,6 +34,16 @@ class AutorListView(LoginRequiredMixin, ListView):
     template_name='autor/listar.html'
     context_object_name='autores'
     ordering='-nome'
+
+    def get_queryset(self):
+        search = self.request.GET.get("q")
+        
+        if search:
+            self.autores = Autor.objects.filter(nome__icontains=search)
+        else:
+            self.autores = Autor.objects.all()
+
+        return self.autores
 
 
 # def listar(request):

@@ -2,6 +2,10 @@
 {% load bootstrap5 %}
 {% block title %}Listagem de Autores{% endblock %}
 {% block content %}
+<form class="d-flex mb-5" role="search" method="get">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Pesquisar" name="q" id="q">
+  <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+</form>
   <ul class="list-group list-group-flush">
     {% for autor in autores %}
     <li class="list-group-item">
