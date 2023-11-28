@@ -7,7 +7,7 @@
   <button class="btn btn-outline-success" type="submit">Pesquisar</button>
 </form>
   <ul class="list-group list-group-flush">
-    {% for autor in autores %}
+    {% for autor in page_obj %}
     <li class="list-group-item">
       {% if autor.avatar %}
       <img src="{{ autor.avatar.url }}" alt="" width="60">
@@ -17,7 +17,7 @@
       <a href="{% url 'detalhar-autor' autor.id %}">{{autor.nome}}</a></li>
     {% endfor %}
   </ul>
-
+  {% bootstrap_pagination page_obj %}
   {% if perms.noticia.add_autor %}
   <a class="btn btn-primary" href="{% url 'cadastrar-autor' %}" role="button">Cadastrar Autor</a>
   {% endif %}

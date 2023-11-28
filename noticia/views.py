@@ -34,6 +34,7 @@ class AutorListView(LoginRequiredMixin, ListView):
     template_name='autor/listar.html'
     context_object_name='autores'
     ordering='-nome'
+    paginate_by = 5
 
     def get_queryset(self):
         search = self.request.GET.get("q")
@@ -134,6 +135,7 @@ class NoticiaListView(LoginRequiredMixin, ListView):
     template_name='noticia/listar.html'
     context_object_name='noticias'
     ordering='-titulo'
+    paginate_by = 5
 
 
 class NoticiaDetailView(LoginRequiredMixin, DetailView):
