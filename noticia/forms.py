@@ -9,7 +9,7 @@ class AutorForm(ModelForm):
     def clean_idade(self):
         idade = self.cleaned_data["idade"]
 
-        if idade < 18:
+        if idade is not None and idade < 18:
            raise  ValidationError("O autor não pode ter menos de 18 anos.", code='menor_idade')
         
         return idade

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from noticia.views import HomeTemplateView, RegistrationView
+from noticia.views import HomeTemplateView, RegistrationView, PerfilAutor
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,6 +24,7 @@ urlpatterns = [
     path('', HomeTemplateView.as_view(), name='home'),
     path('noticias/', include('noticia.urls')),
     path('admin/', admin.site.urls),
+    path('perfil/', PerfilAutor.as_view(), name='perfil'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/registration', RegistrationView.as_view(), name='registration'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

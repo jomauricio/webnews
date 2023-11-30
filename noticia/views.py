@@ -184,3 +184,5 @@ class RegistrationView(CreateView):
         messages.add_message(self.request, messages.SUCCESS, "Cadastro realizado com sucesso!")
         return reverse('home')
 
+class PerfilAutor(TemplateView):
+    template_name='perfil.html'    

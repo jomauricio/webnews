@@ -10,7 +10,7 @@ class Autor(models.Model):
     email = models.EmailField("Email")
     idade = models.PositiveSmallIntegerField("Idade", null=True, blank=True)
     avatar = models.ImageField("Foto", upload_to='avatares', blank=True, null=True)
-    user = models.OneToOneField(get_user_model(), verbose_name="Usuário",on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(get_user_model(), verbose_name="Usuário",on_delete=models.CASCADE, null=True, blank=True, related_name="autor")
 
     def __str__(self):
         return self.nome + " " + self.email
@@ -35,7 +35,7 @@ class Noticia(models.Model):
     conteudo = models.TextField("Conteúdo")
     data_pub = models.DateField("Data de publicação")
     tags = models.CharField("Categoria", max_length=100, choices=CATEGORIAS)
-    autor = models.ForeignKey(Autor, verbose_name="Autor", on_delete=models.CASCADE)
+    autor = models.ForeignKey(Autor, verbose_name="Autor", on_delete=models.CASCADE, related_name="noticias")
 
     def __str__(self):
         return self.titulo
