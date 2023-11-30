@@ -1,14 +1,16 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 
 class Autor(models.Model):
     
     nome = models.CharField("Nome", max_length=200)
-    data_nascimento = models.DateField("Data de Nascimento", default="1980-01-01")
+    data_nascimento = models.DateField("Data de Nascimento", null=True, blank=True)
     email = models.EmailField("Email")
-    idade = models.PositiveSmallIntegerField("Idade")
+    idade = models.PositiveSmallIntegerField("Idade", null=True, blank=True)
     avatar = models.ImageField("Foto", upload_to='avatares', blank=True, null=True)
+    user = models.OneToOneField(get_user_model(), verbose_name="Usuário",on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.nome + " " + self.email
